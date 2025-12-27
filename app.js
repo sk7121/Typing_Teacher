@@ -86,7 +86,7 @@ app.post("/logged-in", async (req, res) => {
             return res.send("This Email ID does not exist. Please go to the Sign In or Register page.");
         }
 
-        res.render("includes/home.ejs", { user });
+        return res.render("includes/home.ejs", { user });
     } catch (error) {
         console.error("Error in /logged-in:", error);
         res.status(500).send("Internal Server Error");
@@ -95,15 +95,23 @@ app.post("/logged-in", async (req, res) => {
 
 
 app.post("/home", async (req, res) => {
-    let user = req.body.user;
-    let result = await User.findOne({ email_id: user.email_id });
-    if (!result) {
-        const newUser = new User(user);
-        await newUser.save();
-        await res.redirect("/home");
+    try {
+        const user = req.body.user;
+        const result = await User.findOne({ email_id: user.email_id });
+
+        if (!result) {
+            const newUser = new User(user);
+            await newUser.save();
+            return res.render("includes/home.ejs", { user: newUser });
+        }
+
+        return res.send("The Email Id Already Exist. Please Log In.");
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send("Server Error");
     }
-    res.send("The Email Id Already Exist. Please Log In.");
 });
+
 
 
 
