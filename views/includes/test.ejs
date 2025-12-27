@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test page</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #e0dcf5d4;
+        }
+
+        .container {
+            opacity: 0;
+            transition: opacity 0.5s ease-out 0.3s, transform 0.5s ease-out 0.3s;
+            transform: translateX(50%);
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 80vw;
+            height: 30vh;
+            margin-top: 5rem;
+            gap: 5rem;
+        }
+
+        .container.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .box {
+            background-image: url('https://media.istockphoto.com/id/1181208977/photo/typing-on-keyboard.jpg?s=612x612&w=0&k=20&c=zu3uZWyIqVjQg-tAzZI01MfyMNmRtOyjeUFwzu5TmLU=');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 20vw;
+            height: 25vh;
+            border-radius: 10px;
+            background-position-x: center;
+            transition: 1s;
+            font-size: 15px;
+        }
+
+        .btn {
+            cursor: pointer;
+            border: none;
+            transition: 1s;
+            width: 20vw;
+            height: 25vh;
+            margin: 0;
+            padding: 0;
+            border-radius: 15px;
+        }
+
+        .btn:hover {
+            text-decoration: underline;
+            font-size: 20px;
+            transform: scale(1.2);
+            color: rgb(173, 228, 250);
+            box-shadow: rgba(121, 157, 185, 0.697) 4px 5px 20px 0px;
+            border-radius: 15px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Choose the below test options</h2>
+    <div class="container">
+        <form action="/test/1minutetest" method="get">
+            <button class="btn">
+                <div class="box">
+                    <h3>1 minute Test</h3>
+                </div>
+            </button>
+        </form>
+        <form action="/test/2minutetest" method="get">
+            <button class="btn">
+                <div class="box">
+                    <h3>2 minute Test</h3>
+                </div>
+            </button>
+        </form>
+        <form action="/test/5minutetest" method="get">
+            <button class="btn">
+                <div class="box">
+                    <h3>5 minute Test</h3>
+                </div>
+            </button>
+        </form>
+
+
+
+    </div>
+
+    <script>
+        function animate_container() {
+            document.querySelector(".container").classList.add("show");
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                animate_container();
+            }, 400);
+
+        });
+    </script>
+</body>
+
+</html>

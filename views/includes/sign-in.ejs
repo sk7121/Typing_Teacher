@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10%;
+            width: 30vw;
+            height: 60vh;
+            box-shadow: bisque 0px 0px 20px 4px;
+            border-radius: 20px 0px 20px 0px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 32px;
+            margin-top: -6%;
+            margin-left: -15%;
+        }
+
+        .labels {
+            width: 15vw;
+            height: 3vh;
+        }
+
+        .inputs {
+            width: 15vw;
+            height: 3vh;
+        }
+
+        #btn {
+            width: 100px;
+            height: 34px;
+            border-radius: 15px;
+            margin-left: 20vw;
+            cursor: pointer;
+            background-color: #ff00ee24;
+            border: none;
+        }
+
+        #btn:hover {
+            background-color: rgb(235, 129, 129);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <form action="/home" method="post">
+            <div><label for="first_name" class="labels">First Name : </label>
+                <input type="text" name="user[first_name]" placeholder="Bhagat" required class="inputs">
+            </div>
+            <div><label for="last_name" class="labels">Last Name : </label>
+                <input type="text" name="user[last_name]" placeholder="Singh" required class="inputs">
+            </div>
+            <div><label for="email_id" class="labels"> Email Id : </label>
+                <input type="text" name="user[email_id]" placeholder="BhagatSingh1947@gmail.com" required class="inputs">
+            </div>
+            <div><label for="password" class="labels"> Password : </label>
+                <input type="text" name="user[password]" placeholder="Abc@123" required class="inputs">
+            </div>
+            <div><label for="phone_no" class="labels"> Phone No. : </label>
+                <input type="number" name="user[phone_no]" placeholder="9876543210" required class="inputs">
+            </div>
+            <button id="btn">Submit</button>
+
+
+
+
+
+
+
+        </form>
+    </div>
+</body>
+
+</html>

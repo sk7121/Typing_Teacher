@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box {
+            margin-top: 10%;
+            width: 30vw;
+            height: 40vh;
+            box-shadow: #b5b3b1 0px 0px 20px 4px;
+            border-radius: 15px;
+        }
+
+
+        .btn {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            padding: 15px 60px;
+            cursor: pointer;
+            border: 2px solid #f27f7f;
+            transition: 0.5s;
+            border-radius: 10px;
+        }
+
+        .btn:hover {
+            background-color: rgb(178, 178, 233);
+            border-radius: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            gap: 5%;
+        }
+
+        .colbox {
+            display: flex;
+            width: 90%;
+        }
+
+        label {
+            width: 40%;
+            padding: 6px;
+        }
+
+        input {
+            flex: 1;
+            padding: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <form action="/logged-in" method="post">
+            <div class="colbox">
+                <label for="mail">Enter Your Email Id : </label>
+                <input type="text" id="mail" name="user[email_id]" placeholder="abc123@gmail.com">
+            </div>
+            <div class="colbox">
+                <label for="password">Enter a Valid password : </label>
+                <input type="text" id="password" name="user[password]"
+                    placeholder="[A-Z,a-z,0-9,%,@,#,using any symbol]">
+            </div>
+            <button class="btn">Submit</button>
+        </form>
+    </div>
+</body>
+
+</html>

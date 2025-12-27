@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Circular Infinite Scroll</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f1ecea;
+        }
+
+        .container {
+            margin-top: 1%;
+            height: 70vh;
+            width: 70%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+            overflow-x: auto;
+            overflow-y: hidden;
+            gap: 20px;
+            padding: 0px 30px;
+            scrollbar-width: none;
+            border-radius: 10px;
+            box-shadow: #f1c7f2 11px 7px 17px;
+        }
+
+        .container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .box {
+            flex: 0 0 auto;
+            width: 100%;
+            height: 90%;
+            background-color: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            border-radius: 20px;
+        }
+
+        #z-type {
+            background-image: url("https://www.rocketstem.org/wp-content/uploads/2015/04/004_antenna_galaxies.jpg");
+            background-size: cover;
+            background-position: center center;
+        }
+
+        #fiting-game {
+            background-image: url("https://i.pinimg.com/736x/d1/6f/bf/d16fbf70bce3a6ad0e99dad1035c7b7e.jpg");
+        }
+
+        #fast-typing2 {
+            background-image: url("https://media.istockphoto.com/id/157531137/photo/typing-motion-blurred.jpg?s=2048x2048&w=is&k=20&c=E-LCA-DQMcEnV8Z6WlmVEpRyBOiw7kbPIv28EbJsClg=");
+        }
+
+        #type-clock {
+            background-image: url("https://media.istockphoto.com/id/1300464397/photo/business-working-times-concept-people-work-typing-on-laptop-computer-overlay-with-in-time.jpg?s=2048x2048&w=is&k=20&c=Hy9TNATbUzEoUNo1-wptj6-krda8QOhKQK7fxcZnamM=");
+            background-size: cover;
+            background-position: center center;
+        }
+
+        #fast-type {
+            background-image: url("https://media.istockphoto.com/id/656583110/vector/businesswoman-is-speedy-typing-in-office-on-desk-among-huge-piles-of-documents-and-almost.jpg?s=2048x2048&w=is&k=20&c=rVlKe6erjhy9FUpaYnKzDdBNQbkm6cA0_A6KJNGmgm0=");
+            background-size: cover;
+            background-position: center center;
+        }
+
+        .box a {
+            font-size: 40px;
+            text-decoration: none;
+            color: rgb(10, 191, 246);
+            transition: 1s;
+        }
+
+        .box a:hover {
+            font-size: 50px;
+            text-decoration: underline;
+            color: blueviolet;
+        }
+
+        h2 {
+            font-size: 40px;
+            padding: 2px 20px;
+            border-radius: 20px;
+            box-shadow: #ed8b09 2px 2px 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>GAMES</h2>
+    <div class="container" id="container">
+        <div class="box" id="fast-type"><a href="https://poki.com/en/g/fast-typer">Fast Typer</a></div>
+        <div class="box" id="type-clock"><a href="https://poki.com/en/g/fast-typer-3">type-clock</a></div>
+        <div class="box" id="fiting-game"><a href="https://poki.com/en/g/typing-fighter">type-fighter</a></div>
+        <div class="box" id="z-type"><a href="https://zty.pe/">z-type</a></div>
+        <div class="box" id="fast-typing2"><a href="https://poki.com/en/g/fast-typer-2">fast-typer2</a></div>
+    </div>
+
+    <script>
+        const container = document.getElementById("container");
+
+        const cloneBoxes = () => {
+            const originalBoxes = Array.from(container.children);
+            originalBoxes.forEach(box => {
+                const clone = box.cloneNode(true);
+                container.appendChild(clone);
+            });
+        };
+
+        cloneBoxes();
+
+        function easeInOutQuad(t) {
+            return t < 0.5
+                ? 2 * t * t
+                : -1 + (4 - 2 * t) * t;
+        }
+
+        function animateScroll(distance, duration = 1000) {
+            const start = container.scrollLeft;
+            const startTime = performance.now();
+
+            function scrollStep(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const ease = easeInOutQuad(progress);
+                container.scrollLeft = start + distance * ease;
+
+                if (progress < 1) {
+                    requestAnimationFrame(scrollStep);
+                }
+            }
+
+            requestAnimationFrame(scrollStep);
+        }
+
+        const boxWidth = container.querySelector('.box').offsetWidth + 20;
+
+        let scrollInterval;
+
+        function startScroll() {
+            scrollInterval = setInterval(() => {
+                if (container.scrollLeft >= container.scrollWidth / 2) {
+                    container.scrollLeft = 0;
+                }
+                animateScroll(boxWidth, 1000);
+            }, 2000);
+        }
+
+        function stopScroll() {
+            clearInterval(scrollInterval);
+        }
+
+        startScroll();
+
+        container.addEventListener("mouseenter", stopScroll);
+        container.addEventListener("mouseleave", startScroll);
+    </script>
+
+
+</body>
+
+</html>

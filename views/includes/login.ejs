@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page..</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 40vw;
+            min-height: 70vh;
+            margin-top: 6rem;
+            border-radius: 20px;
+            box-shadow: #3300ff78 3px 0px 20px 0px;
+        }
+
+        .log-in-btns {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 4rem;
+
+        }
+
+        .btn {
+            width: 10rem;
+            height: 2rem;
+            border-radius: 5px;
+            border: 1px solid black;
+            cursor: pointer;
+            border: none;
+            transition: 1s;
+        }
+
+        .btns {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+
+        .btn.sign-in {
+            background-color: rgb(195, 174, 197);
+        }
+
+        .btn.log-in {
+            background-color: rgb(170, 181, 180);
+        }
+
+        .btn.guess {
+            background-color: rgb(197, 190, 190);
+        }
+
+        .btn:hover {
+            transform: scale(1.2);
+            z-index: 1;
+            background-color: rgb(203, 102, 102);
+            color: white;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container"
+        style="background-image: url('https://media.istockphoto.com/id/479157044/photo/pressing-enter-button.jpg?s=612x612&w=0&k=20&c=YYqEDx4wUlg4280xF1J5HthbHL6dD1kEeiSvjS4T28M=');">
+
+        <div class="btns">
+            <div class="log-in-btns">
+                <form action="/sign-in" method="get">
+                    <button class="btn sign-in">Sign-in</button>
+                </form>
+                <form action="/logged-in" method="get">
+                    <button class="btn log-in">Log-in</button>
+                </form>
+            </div>
+            <form method="get" action="/guess">
+                <button class="btn guess">Continue As Guess</button>
+            </form>
+        </div>
+
+
+    </div>
+</body>
+
+</html>

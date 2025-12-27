@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 12%;
+        }
+
+        .navbar {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 80%;
+            height: 6%;
+            margin-top: 2%;
+            border-radius: 25px;
+            gap: 20%;
+        }
+
+        #input_textarea {
+            width: 53%;
+            height: 47%;
+            font-size: 30px;
+            color: #072b4ea2;
+            background-color: #d3aada4d;
+            border: none;
+            border-radius: 20px;
+            padding: 25px 25px;
+            box-shadow: #8c8ac7 0px 0px 5px 0px;
+        }
+
+        #input_textarea:focus {
+            outline: none;
+            box-shadow: #e87171 0px 0px 5px 0px;
+        }
+
+        .labels,
+        strong {
+            font-size: 25px;
+        }
+
+        .btn {
+            width: 132px;
+            height: 50px;
+            border-radius: 10px;
+            border: none;
+            box-shadow: #2de2ce 2px 2px 2px;
+            margin-left: 55%;
+            margin-top: -3%;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: cadetblue;
+        }
+
+        .result {
+            border-radius: 15px;
+            background-color: azure;
+            box-shadow: blueviolet 2px 2px 20px 3px;
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            margin-top: 14.4%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            display: none;
+
+        }
+
+        .nav-child,
+        .merged {
+            box-shadow: #a5a5ec 2px 2px 2px;
+            border-radius: 25px;
+            padding: 5px 13px;
+        }
+
+        .home-btn {
+            position: absolute;
+            margin-top: -18%;
+            margin-left: -4%;
+            padding: 10px 20px;
+            border-radius: 0px 10px 0px 10px;
+            border: none;
+            background-color: #b9d7f2;
+            box-shadow: #f59421 0px 0px 3px 0px;
+            cursor: pointer;
+            display: none;
+            transition: 1s;
+        }
+
+        .home-btn:hover {
+            background-color: #072b4ea2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar">
+            <h2 class="nav-child">FREE HAND TYPING...</h2>
+            <div class="merged">
+                <label class="labels">Time : </label><strong id="time_count">0</strong>
+            </div>
+            <div class="merged">
+                <label class="labels">Words :</label><strong id="word_count">0</strong>
+            </div>
+        </div>
+
+        <textarea name="input_textarea" id="input_textarea" placeholder="start from here ..."></textarea>
+
+        <button class="btn">STOP</button>
+
+        <div class="result"></div>
+
+        <form action="/home" method="get">
+            <button class="home-btn">Back To Home</button>
+        </form>
+
+    </div>
+
+
+
+
+    <script>
+        let time_start = null;
+        let stopped = false;
+        let word_count = document.getElementById("word_count");
+        let btn = document.getElementsByClassName("btn")[0];
+        let time_count = document.getElementById("time_count");
+        let result = document.getElementsByClassName("result")[0];
+        let home_btn = document.getElementsByClassName("home-btn")[0];
+
+
+
+        let input_text = document.getElementById("input_textarea");
+        console.log(input_text);
+
+        input_text.addEventListener("input", () => {
+            if (!time_start && !stopped) {
+
+                time_start = Date.now();
+                console.log(time_start);
+
+                interval = setInterval(updateTime, 1000);
+
+            }
+            updateWordCount();
+        });
+
+        function updateWordCount() {
+            let text = input_text.value.trim();
+            let words = text.split(/\s+/).filter(word => word.length > 0);
+            let wordCount = words.length;
+
+            word_count.textContent = wordCount;
+
+
+        }
+
+        function updateTime() {
+            let second = Math.floor((Date.now() - time_start) / 1000);
+            time_count.textContent = second;
+        }
+
+        btn.addEventListener("click", () => {
+            if (!time_start) {
+                return;
+            }
+            clearInterval(interval);
+            stopped = true;
+
+            let text = input_text.value.trim();
+            let words = text.split(/\s+/).filter(word => word.length > 0);
+            let wordCount = words.length;
+
+            time_in_second = Math.floor((Date.now() - time_start) / 1000);
+            time_in_minute = time_in_second / 60;
+
+            let wpm = time_in_minute > 1 ? Math.round(wordCount / time_in_minute) : wordCount;
+
+            result.innerHTML = `✅ <strong>Final Score:</strong><br>
+        📝 Words Typed: ${wordCount}<br>
+        ⏱️ Time Taken: ${time_in_second} seconds<br>
+        🚀 WPM: ${wpm}`;
+
+            result.style.display = "flex";
+            home_btn.style.display = "unset";
+
+            input_text.disabled = true;
+            btn.disabled = true;
+
+        });
+
+
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .navbar {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 84%;
+            height: 50px;
+            gap: 30%;
+            border-radius: 15px;
+            background-color: #e68ee6;
+            margin-top: 10px;
+        }
+
+        .word-box {
+            width: 80%;
+            height: 30%;
+            font-size: 20px;
+            border-radius: 15px;
+            background-color: #efe3d4;
+            padding: 0px 20px;
+        }
+
+        .input-box {
+            width: 80%;
+            height: 20rem;
+        }
+
+        #input-text {
+            width: 99.5%;
+            height: 98.5%;
+            border: none;
+            box-shadow: inset #e3cdf8 0px 0px 13px;
+            padding: 20px;
+            font-size: 20px;
+        }
+
+        #input-text:focus {
+            box-shadow: inset #f4a0a0 0px 0px 13px;
+            outline: none;
+        }
+
+        .result {
+            width: 300px;
+            height: 200px;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            background-color: #d7f1f2;
+            border-radius: 30px;
+            box-shadow: #0ce8e8 0px 0px 20px 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <h2>5 Minute Test</h2>
+        <div><strong>Time : </strong><span id="time">300</span></div>
+        <div><strong>Words : </strong><span id="words">0</span></div>
+    </div>
+
+    <div class="word-box">
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quia, maxime mollitia. Et illo veniam perferendis
+            eius adipisci maxime, magnam ab repellendus odit cumque exercitationem ipsa a obcaecati fugit sed velit
+            labore voluptatibus. Perspiciatis magni assumenda dolorem placeat cupiditate quisquam ex, doloribus ullam
+            atque, perferendis non, illo voluptate nesciunt consequatur ratione aut. Dolorum delectus voluptate
+            doloribus qui reiciendis, officia quis rerum ut accusantium provident quibusdam suscipit magnam iste veniam,
+            est placeat illo! Dolor quos nostrum quasi quas nisi officiis facilis, ab commodi quidem assumenda quo
+            accusamus, praesentium architecto cupiditate a laborum doloremque ullam? Recusandae, nam molestias
+            perspiciatis nulla cum ipsam neque ullam sequi doloremque eos excepturi velit quam error repudiandae ratione
+            minima aliquid odit maiores earum voluptatibus eius voluptas modi. Laudantium officia sit temporibus labore
+            incidunt ipsa inventore iure, nobis cumque modi facilis eius dolor commodi. Nihil maxime voluptates libero
+            et ducimus harum possimus. Nam accusantium autem totam ullam reiciendis dolore, commodi praesentium
+            asperiores facere! Aut magnam quos repellat veniam, sed praesentium assumenda delectus placeat
+            exercitationem possimus aperiam, illum mollitia modi minus repellendus, animi vel expedita nisi voluptas
+            perferendis dolore fugit. Perferendis eaque ab provident magni sit molestiae illo asperiores unde obcaecati
+            vel, aspernatur repellendus? Repudiandae soluta unde doloribus, veritatis recusandae nisi sapiente eum porro
+            ullam consectetur? Itaque dolorum sed nemo dicta quis fuga laboriosam fugiat molestias reiciendis, at
+            reprehenderit nobis.</p>
+    </div>
+
+    <div class="result"></div>
+
+    <div class="input-box">
+        <textarea id="input-text" placeholder="start typing here..."></textarea>
+    </div>
+
+    <script>
+        let time = document.getElementById("time");
+        let words = document.getElementById("words");
+        let input_text = document.getElementById("input-text");
+        let word_box = document.querySelector(".word-box p");
+        let given_words = word_box.innerText.trim().split(/\s+/);
+
+        word_box.innerHTML = given_words.map(word => `<span>${word}</span>`).join(" ");
+
+        const given_word_spans = document.querySelectorAll(".word-box span");
+        let result = document.getElementsByClassName("result")[0];
+
+
+
+        let start_time = null;
+        let interval;
+        let para;
+        let input_words;
+        let target_span;
+        let correct_count = 0;
+        let wrong_count = 0;
+
+
+        input_text.addEventListener("input", () => {
+            if (!start_time) {
+                start_time = Date.now();
+                interval = setInterval(updateTime, 1000);
+            }
+
+        });
+
+        function updateTime() {
+            let diff = Math.floor((Date.now() - start_time) / 1000);
+            let sec = 300 - diff;
+
+            time.textContent = sec;
+
+            if (sec <= 0) {
+                clearInterval(interval);
+                input_text.disabled = true;
+                result.innerHTML = `<h3>RESULT</H3> <br> 
+                    correct : ${correct_count} <br> 
+                    wrong : ${wrong_count} <br> 
+                    total ${(correct_count + wrong_count) / 5} WPM`;
+
+
+                result.style.display = "flex";
+
+            }
+
+            para = input_text.value;
+            input_words = para.trim().split(/\s+/);
+
+            correct_count = 0;
+            wrong_count = 0;
+
+            input_words.forEach((element, index) => {
+
+                target_span = given_word_spans[index];
+
+                if (element == target_span.innerText) {
+                    target_span.style.color = "green";
+                    target_span.style.fontSize = "20px";
+                    correct_count++;
+                }
+                else if (index == input_words.length - 1) {
+                    target_span.style.color = "purple";
+                    target_span.style.fontSize = "20px";
+                }
+
+                else if (element != target_span.innerText) {
+                    target_span.style.color = "red";
+                    target_span.style.fontSize = "20px";
+                    wrong_count++;
+                }
+
+            });
+
+            words.textContent = correct_count;
+        }
+
+
+    </script>
+</body>
+
+</html>
