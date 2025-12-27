@@ -3,12 +3,14 @@ const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
 const User = require("./models/userdata");
+const dotenv = require("dotenv");
+dotenv.config();
 
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/UserDetails";
+const dbUrl = process.env.ATLASDB_URL;
 
 async function main() {
-    mongoose.connect(MONGO_URL);
+    mongoose.connect(dbUrl);
 }
 
 main()
