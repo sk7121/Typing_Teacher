@@ -13,7 +13,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 5rem;
+            gap: 20px;
         }
 
         .boxes {
@@ -22,9 +22,8 @@
             justify-content: center;
             align-items: center;
             width: 60vw;
-            height: 30vh;
             gap: 5rem;
-            margin-top: -2%;
+            flex-wrap: wrap;
         }
 
         .box {
@@ -39,12 +38,14 @@
             transition: 1s;
             position: relative;
             color: rgb(245, 7, 7);
+            min-width: 300px;
         }
 
 
         #welcome {
-            box-shadow: inset #c900ffc7 1px 0px 20px 0px;
+            box-shadow: inset #92b9e0c7 1px 0px 20px 0px;
             padding: 10px 15px;
+            margin-top: 10px;
         }
 
         .btn {
@@ -55,6 +56,7 @@
             margin: 0;
             padding: 0;
             border-radius: 20px;
+            min-width: 300px;
         }
 
         .box:hover {
@@ -76,9 +78,24 @@
             justify-content: center;
             align-items: center;
             width: 10%;
-            position: sticky;
-            margin-left: 89%;
-            margin-top: -10%;
+            position: absolute;
+            right: 40px;
+            top: 100px;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            margin-top: 100px;
+            gap: 80px;
+        }
+
+        h2 {
+            margin: 0;
         }
     </style>
 </head>
@@ -95,47 +112,51 @@
         </h2>
     </div>
 
-    <div class=" boxes top">
-        <form action="">
-            <button class="btn" style="border: none;">
-                <div class="box"
-                    style="background-image: url('https://img.freepik.com/free-photo/learning-education-ideas-insight-intelligence-study-concept_53876-120116.jpg?semt=ais_hybrid&w=740'); background-position: center; color: rgb(204, 169, 196);">
-                    <h2><a href="https://www.edclub.com/sportal/program-3.game">Learnings</a></h2>
-                </div>
-            </button>
-        </form>
-
-        <form action="/games" method="get">
-            <button class="btn" style="border: none;">
-                <div class="box"
-                    style="background-image: url('https://media.istockphoto.com/id/1320799591/vector/game-on-neon-game-controller-or-joystick-for-game-console-on-blue-background.jpg?s=612x612&w=0&k=20&c=CbxRq6ctP5Ta1QLu18UMtvgJf4D-zFpTMm0Rz14_Gy0='); background-position: center;color: rgb(204, 169, 196);">
-                    <h2>Games</h2>
-                </div>
-            </button>
-        </form>
-
-    </div>
+    <div class="container">
 
 
-    <div class="boxes bottom">
-        <form method="get" action="/test">
-            <button class="btn" style="border: none;">
-                <div class="box"
-                    style="background-image: url('https://t4.ftcdn.net/jpg/02/29/10/07/360_F_229100791_ue8lKge54QBQB77KE0LmjCrur0pWWEVH.jpg'); background-position: center;color: rgb(204, 169, 196);">
-                    <h2>Tests</h2>
-                </div>
-            </button>
-        </form>
+        <div class=" boxes top">
+            <form action="">
+                <button class="btn" style="border: none;">
+                    <div class="box"
+                        style="background-image: url('https://img.freepik.com/free-photo/learning-education-ideas-insight-intelligence-study-concept_53876-120116.jpg?semt=ais_hybrid&w=740'); background-position: center; color: rgb(204, 169, 196);">
+                        <h2><a href="https://www.edclub.com/sportal/program-3.game">Learnings</a></h2>
+                    </div>
+                </button>
+            </form>
 
-        <form action="/free_hand" method="get">
-            <button class="btn" style="border: none;">
-                <div class="box"
-                    style="background-image: url('https://img.freepik.com/premium-photo/male-hand-holds-keyboard-light-isolated_164357-1842.jpg?semt=ais_hybrid&w=740'); background-position: center;color: rgb(204, 169, 196);">
-                    <h2>Free Hand Typing</h2>
-                </div>
-            </button>
-        </form>
+            <form action="/games" method="get">
+                <button class="btn" style="border: none;">
+                    <div class="box"
+                        style="background-image: url('https://media.istockphoto.com/id/1320799591/vector/game-on-neon-game-controller-or-joystick-for-game-console-on-blue-background.jpg?s=612x612&w=0&k=20&c=CbxRq6ctP5Ta1QLu18UMtvgJf4D-zFpTMm0Rz14_Gy0='); background-position: center;color: rgb(204, 169, 196);">
+                        <h2>Games</h2>
+                    </div>
+                </button>
+            </form>
 
+        </div>
+
+
+        <div class="boxes bottom">
+            <form method="get" action="/test">
+                <button class="btn" style="border: none;">
+                    <div class="box"
+                        style="background-image: url('https://t4.ftcdn.net/jpg/02/29/10/07/360_F_229100791_ue8lKge54QBQB77KE0LmjCrur0pWWEVH.jpg'); background-position: center;color: rgb(204, 169, 196);">
+                        <h2>Tests</h2>
+                    </div>
+                </button>
+            </form>
+
+            <form action="/free_hand" method="get">
+                <button class="btn" style="border: none;">
+                    <div class="box"
+                        style="background-image: url('https://img.freepik.com/premium-photo/male-hand-holds-keyboard-light-isolated_164357-1842.jpg?semt=ais_hybrid&w=740'); background-position: center;color: rgb(204, 169, 196);">
+                        <h2>Free Hand Typing</h2>
+                    </div>
+                </button>
+            </form>
+
+        </div>
     </div>
 
 </body>

@@ -6,26 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        body {
+            margin: 0;
+        }
+
         .container {
             width: 100vw;
             height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
-            gap: 12%;
+            gap: 50px;
         }
 
         .navbar {
             display: flex;
             flex-direction: row;
-            justify-content: center;
             align-items: center;
-            width: 80%;
+            justify-content: space-evenly;
+            width: 80vw;
             height: 6%;
-            margin-top: 2%;
             border-radius: 25px;
-            gap: 20%;
+            gap: 0%;
         }
 
         #input_textarea {
@@ -38,6 +41,8 @@
             border-radius: 20px;
             padding: 25px 25px;
             box-shadow: #8c8ac7 0px 0px 5px 0px;
+            min-width: 300px;
+            min-height: 30vh;
         }
 
         #input_textarea:focus {
@@ -56,9 +61,8 @@
             border-radius: 10px;
             border: none;
             box-shadow: #2de2ce 2px 2px 2px;
-            margin-left: 55%;
-            margin-top: -3%;
             cursor: pointer;
+            margin-left: 48%;
         }
 
         .btn:hover {
